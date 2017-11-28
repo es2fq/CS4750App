@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <?php
 include('sessionwithlogout.php');
+include('db.php');
 ?>
 <html>
 	<head>
@@ -70,13 +71,45 @@ include('sessionwithlogout.php');
 				<!-- Main -->
 					<div id="main">
 
-						<!-- Intro -->
-							<article id="intro">
-								<h2 class="major">Intro</h2>
-								<span class="image main"><img src="images/pic01.jpg" alt="" /></span>
-								<p>Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas. By the way, check out my <a href="#work">awesome work</a>.</p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel sed vehicula.</p>
-							</article>
+						<!-- summary -->
+							<article id="summary">
+								<h2 class="major">Summary</h2>
+
+								<h3>Past Foods</h3>
+								<table>
+					        <thead>
+					            <tr>
+					                <td>Date</td>
+					                <td>Food</td>
+													<td>Count</td>
+													<td>Calories</td>
+					            </tr>
+					        </thead>
+					        <tbody>
+								<?php
+									$sql = "select user_id, foods_id, count, name, calories, date from Food_Intake NATURAL JOIN Foods where user_id=".$_SESSION['user_id'];
+									$result = $connection->query($sql);
+
+
+									if ($result->num_rows > 0) {
+									    // output data of each row
+									    while($row = $result->fetch_assoc()) {
+											?>
+												<tr>
+				                    <td><?php echo $row['date']?></td>
+				                    <td><?php echo $row['name']?></td>
+														<td><?php echo $row['count']?></td>
+														<td><?php echo $row['calories']*$row['count']?></td>
+				                </tr>
+											<?php
+									    	}
+											}
+										?>
+								</tbody>
+		            </table>
+
+
+						</article>
 
 						<!-- Work -->
 							<article id="work">
@@ -89,13 +122,13 @@ include('sessionwithlogout.php');
 						<!-- About -->
 							<article id="about">
 								<h2 class="major">Add Food</h2>
-                                <form action="addfood.php" method="post">
-                                    <select id="selectFood" name="food">
-                                    </select>
-                                    <br>
-                                    How many did you eat? <input id="foodCount" name="count" />
-                                    <input type="submit" />
-                                </form>
+                  <form action="addfood.php" method="post">
+                      <select id="selectFood" name="food">
+                      </select>
+                      <br>
+                      How many did you eat? <input id="foodCount" name="count" />
+                      <input type="submit" />
+                  </form>
 							</article>
 
 						<!-- Sign In -->
@@ -121,7 +154,6 @@ include('sessionwithlogout.php');
 
 								<?php
 								session_start(); // Starting Session
-								include('db.php');
 								if(isset($_POST['action']))
 								{
 										if($_POST['action']=="signin")
@@ -129,13 +161,14 @@ include('sessionwithlogout.php');
 												session_start();
 												$email = mysqli_real_escape_string($connection,$_POST['email']);
 												$password = mysqli_real_escape_string($connection,$_POST['password']);
-												$strSQL = mysqli_query($connection,"select first_name, last_name, email from users where email='".$email."' and password='".md5($password)."'");
+												$strSQL = mysqli_query($connection,"select user_id, first_name, last_name, email from users where email='".$email."' and password='".md5($password)."'");
 												$Results = mysqli_fetch_array($strSQL);
 												if(count($Results)>=1)
 												{
 													$_SESSION['email']=$Results['email'];
 													$_SESSION['first_name']=$Results['first_name'];
 													$_SESSION['last_name']=$Results['last_name'];
+													$_SESSION['user_id']=$Results['user_id'];
 
 													echo "<script type='text/javascript'> document.location = 'index.php'; </script>";// Redirecting To Other Page
 												}
@@ -479,7 +512,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 				<!-- Footer -->
 					<footer id="footer">
-						<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+						<p class="copyright">&copy; Macro Base</p>
 					</footer>
 
 			</div>
