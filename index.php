@@ -56,11 +56,10 @@ include('db.php');
 						<nav>
 							<ul>
 								<li><a href="#summary">Summary</a></li>
-								<li><a href="#work">Work</a></li>
-								<li><a href="#about">Add Food</a></li>
+								<li><a href="#addFood">Add Food</a></li>
 								<li><a href="#diets">Diets</a></li>
-                				<li><a href="#elements">Elements</a></li>
-								<li><a href="logout.php">Log Out</a><li>
+								<li><a href="#leaderboard">Leaderboard</a></li>
+								<li><a href="logout.php">Log Out</a></li>
 								<!--<li><a href="#elements">Elements</a></li>-->
 							</ul>
 						</nav>
@@ -111,16 +110,8 @@ include('db.php');
 
 						</article>
 
-						<!-- Work -->
-							<article id="work">
-								<h2 class="major">Work</h2>
-								<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
-								<p>Adipiscing magna sed dolor elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices.</p>
-								<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
-							</article>
-
-						<!-- About -->
-							<article id="about">
+						<!-- Add Food -->
+							<article id="addFood">
 								<h2 class="major">Add Food</h2>
 									<form action="" method="post">
                       <select id="selectFood" name="food">
@@ -147,7 +138,9 @@ include('db.php');
 
 													if ($connection->query($sql) === TRUE) {
 													    echo "Food has been added.";
-															//add auto refresh
+															unset($_POST);
+															header('Refresh: 2');
+															header("Location:index.php#addFood");
 													}
 											}
 										}
@@ -265,7 +258,9 @@ include('db.php');
 													$sql = "UPDATE Users SET recommended_diets_id=".$diet_id. " WHERE user_id=".$user_id;
 													$result = $connection->query($sql);
 													echo "Diet has been updated.";
+													unset($_POST);
 													header('Refresh: 2');
+													header("Location:index.php#chooseDiet");
 											}
 										}
 									?>
