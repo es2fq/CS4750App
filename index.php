@@ -25,9 +25,8 @@
 						</div>
 						<div class="content">
 							<div class="inner">
-								<h1>Dimension</h1>
-								<p>A fully responsive site template designed by <a href="https://html5up.net">HTML5 UP</a> and released<br />
-								for free under the <a href="https://html5up.net/license">Creative Commons</a> license.</p>
+								<h1>Macrobase</h1>
+                                <p>Who says you can't have fun while dieting? With Macrobase, you can! Track your calories and diet throughout the day, and view your progress as you go on with your life!</p>
 							</div>
 						</div>
 						<nav>
@@ -36,7 +35,7 @@
 								<li><a href="#work">Work</a></li>
 								<li><a href="#about">About</a></li>
 								<li><a href="#contact">Contact</a></li>
-								<!--<li><a href="#elements">Elements</a></li>-->
+                                <li><a href="#elements">Elements</a></li>
 							</ul>
 						</nav>
 					</header>
