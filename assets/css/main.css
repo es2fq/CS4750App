@@ -1592,3 +1592,15 @@
 		body.is-loading #footer {
 			opacity: 0;
 		}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	opacity: 1;
+}
+#foodCount {
+	border: 1.3px solid;
+	border-radius: 3px;
+	background: #212327;
+	width: 50px;
+	padding: 4px;
+	text-align: center;
+}

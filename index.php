@@ -126,8 +126,9 @@ include('db.php');
                       <select id="selectFood" name="food">
                       </select>
                       <br>
-                      How many did you eat? <input id="foodCount" name="count" />
+                      <h3>Number Eaten:</h3> <input id="foodCount" type="number" value="1" min="1" name="count" />
 											<input name="action" type="hidden" value="addFood" />
+                                            <br><br>
                       <input type="submit" />
                   </form>
 									<?php
