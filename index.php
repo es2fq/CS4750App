@@ -54,12 +54,12 @@ include('sessionwithlogout.php');
 						</div>
 						<nav>
 							<ul>
-								<li><a href="#signin">Sign In</a></li>
-								<li><a href="#intro">Intro</a></li>
+								<li><a href="#summary">Summary</a></li>
 								<li><a href="#work">Work</a></li>
 								<li><a href="#about">Add Food</a></li>
 								<li><a href="#contact">Contact</a></li>
                 <li><a href="#elements">Elements</a></li>
+								<li><a href="logout.php">Log Out</a><li>
 								<!--<li><a href="#elements">Elements</a></li>-->
 							</ul>
 						</nav>
