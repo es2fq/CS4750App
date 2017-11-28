@@ -58,7 +58,7 @@ include('db.php');
 								<li><a href="#summary">Summary</a></li>
 								<li><a href="#work">Work</a></li>
 								<li><a href="#about">Add Food</a></li>
-								<li><a href="#contact">Contact</a></li>
+								<li><a href="#diets">Diets</a></li>
                 				<li><a href="#elements">Elements</a></li>
 								<li><a href="logout.php">Log Out</a><li>
 								<!--<li><a href="#elements">Elements</a></li>-->
@@ -122,13 +122,142 @@ include('db.php');
 						<!-- About -->
 							<article id="about">
 								<h2 class="major">Add Food</h2>
-                  <form action="addfood.php" method="post">
+									<form action="" method="post">
                       <select id="selectFood" name="food">
                       </select>
                       <br>
                       How many did you eat? <input id="foodCount" name="count" />
+											<input name="action" type="hidden" value="addFood" />
                       <input type="submit" />
                   </form>
+									<?php
+										if(isset($_POST['action']))
+										{
+											if($_POST['action']=="addFood"){
+													$count = $_POST["count"];
+													$foodData = explode(",", $_POST["food"]);
+													$foodId = $foodData[0];
+													$foodName = $foodData[1];
+													$foodCalories = $foodData[2];
+
+													$userId = $_SESSION["user_id"];
+													$date =  date('Y-m-d');
+													echo($date);
+													$sql = "INSERT INTO Food_Intake (date, user_id, foods_id, count) VALUES (" . "now()" . "," . $userId . "," . $foodId . "," . $count . ")";
+
+													if ($connection->query($sql) === TRUE) {
+													    echo "Food has been added.";
+															//add auto refresh
+													}
+											}
+										}
+									?>
+							</article>
+
+						<!-- Diets -->
+							<article id="diets">
+								<h2 class="major">Your Current Diet</h2>
+									<div>
+										<?php
+											$user_id = $_SESSION["user_id"];
+											$sql = "select user_id, recommended_diets_id, recommended_diets_name, total_calories, diet_food_intakes, total_carbs, total_fat, total_protein, total_cholestrol, total_calories from Users NATURAL JOIN Recommended_Diets where user_id=".$user_id;
+
+											$result = $connection->query($sql);
+											if ($result->num_rows > 0) {
+												while($row = $result->fetch_assoc()) {
+													echo '<p> Your currently selected diet is <b>'.$row['recommended_diets_name'] .'</b>.</p>';
+													$recommended_diets_id = $row['recommended_diets_id'];
+													$diet_sql = "select diet_food_intakes, diet_food_intake_id, recommended_diets_id, food_id, name, count from Recommended_Diets d join Diet_Food_Intake f on d.diet_food_intakes = f.diet_food_intake_id join Foods x on f.food_id = x.foods_id WHERE recommended_diets_id=".$recommended_diets_id;
+													$diet_result = $connection->query($diet_sql);
+													while($diet_row = $diet_result->fetch_assoc()) {
+													?>
+														<table>
+															<caption><b>Diet Breakdown</b></caption>
+											        <thead>
+											            <tr>
+											                <td>Food</td>
+											                <td>Count</td>
+																			<td>Total Calories</td>
+																			<td>Total Carbs</td>
+																			<td>Total Fat</td>
+																			<td>Total Protein</td>
+																			<td>Total Cholestrol</td>
+											            </tr>
+											        </thead>
+											        <tbody>
+															<tr>
+																	<td><?php echo $diet_row['name']?></td>
+																	<td><?php echo $diet_row['count']?></td>
+																	<td><?php echo $row['total_calories']?></td>
+																	<td><?php echo $row['total_carbs']?></td>
+																	<td><?php echo $row['total_fat']?></td>
+																	<td><?php echo $row['total_protein']?></td>
+																	<td><?php echo $row['total_cholestrol']?></td>
+															</tr>
+														</tbody>
+														</table>
+														<p> <a href="#chooseDiet"> Would you like to choose a different diet? </a></p>
+														<?php
+													}
+												}
+											} else {
+												echo '<p> No recommended diet has been selected. <a href="#chooseDiet">Would you like to choose a diet?</a></p>';
+											}
+										?>
+									</div>
+							</article>
+
+						<!-- Diets -->
+							<article id="chooseDiet">
+								<h2 class="major">Recommended Diets</h2>
+									<div>
+										<?php
+											$user_id = $_SESSION["user_id"];
+											$sql = "select user_id, recommended_diets_id, recommended_diets_name, total_calories, diet_food_intakes, total_carbs, total_fat, total_protein, total_cholestrol, total_calories from Users NATURAL JOIN Recommended_Diets where user_id=".$user_id;
+
+											$result = $connection->query($sql);
+											if ($result->num_rows > 0) {
+												while($row = $result->fetch_assoc()) {
+													echo '<p> Your currently selected diet is <b>'.$row['recommended_diets_name'] .'</b>.</p>';
+													$recommended_diets_id = $row['recommended_diets_id'];
+													$diet_sql = "select diet_food_intakes, diet_food_intake_id, recommended_diets_id, food_id, name, count from Recommended_Diets d join Diet_Food_Intake f on d.diet_food_intakes = f.diet_food_intake_id join Foods x on f.food_id = x.foods_id WHERE recommended_diets_id=".$recommended_diets_id;
+													$diet_result = $connection->query($diet_sql);
+													while($diet_row = $diet_result->fetch_assoc()) {
+													?>
+														<table>
+															<caption><b>Diet Breakdown</b></caption>
+											        <thead>
+											            <tr>
+											                <td>Food</td>
+											                <td>Count</td>
+																			<td>Total Calories</td>
+																			<td>Total Carbs</td>
+																			<td>Total Fat</td>
+																			<td>Total Protein</td>
+																			<td>Total Cholestrol</td>
+											            </tr>
+											        </thead>
+											        <tbody>
+															<tr>
+																	<td><?php echo $diet_row['name']?></td>
+																	<td><?php echo $diet_row['count']?></td>
+																	<td><?php echo $row['total_calories']?></td>
+																	<td><?php echo $row['total_carbs']?></td>
+																	<td><?php echo $row['total_fat']?></td>
+																	<td><?php echo $row['total_protein']?></td>
+																	<td><?php echo $row['total_cholestrol']?></td>
+															</tr>
+														</tbody>
+														</table>
+														<p> <a href="#chooseDiet"> Would you like to choose a different diet? </a></p>
+														<?php
+													}
+												}
+											} else {
+												echo '<p> No recommended diet has been selected. <a href="#chooseDiet">Would you like to choose a diet?</a></p>';
+											}
+										?>
+									</div>
 							</article>
 
 						<!-- Sign In -->
