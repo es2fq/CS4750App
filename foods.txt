@@ -1,45 +1,45 @@
-apple,72
-bagel,289
-banana,105
-beer,153
-bread,66
-butter,102
-carrots,52
-cheddar cheese,113
-chicken breast,142
-chili with breans,287
-chocolate chip cookie,59
-coffee,2
-cola,136
-corn,180
-egg,102
-graham cracker,59
-granola bar,193
-green beans,40
-ground beef patty,193
-hot dog,137
-ice cream,145
-jelly doughnut,289
-ketchup,15
-milk,122
-mixed nuts,168
-mustard,6
-oatmeal,147
-orange juice,112
-peanut butter,180
-pizza,298
-pork chop,221
-potato,161
-potato chips,155
-pretzels,108
-raisins,130
-ranch salad dressing,146
-red wine,123
-rice,205
-salsa,35
-shrimp,84
-spaghetti,221
-spaghetti sauce,92
-tuna,100
-white wine,121
-cake,243
+1,apple,72
+2,bagel,289
+3,banana,105
+4,eer,153
+5,bread,66
+6,butter,102
+7,carrots,52
+8,cheddar cheese,113
+9,chicken breast,142
+10,chili with breans,287
+11,chocolate chip cookie,59
+12,coffee,2
+13,cola,136
+14,corn,180
+15,egg,102
+16,graham cracker,59
+17,granola bar,193
+18,green beans,40
+19,ground beef patty,193
+20,hot dog,137
+21,ice cream,145
+22,jelly doughnut,289
+23,ketchup,15
+24,milk,122
+25,mixed nuts,168
+26,mustard,6
+27,oatmeal,147
+28,orange juice,112
+29,peanut butter,180
+30,pizza,298
+31,pork chop,221
+32,potato,161
+33,potato chips,155
+34,pretzels,108
+35,raisins,130
+36,ranch salad dressing,146
+37,red wine,123
+38,rice,205
+39,salsa,35
+40,shrimp,84
+41,spaghetti,221
+42,spaghetti sauce,92
+43,tuna,100
+44,white wine,121
+45,cake,243

@@ -59,7 +59,7 @@ include('db.php');
 								<li><a href="#work">Work</a></li>
 								<li><a href="#about">Add Food</a></li>
 								<li><a href="#contact">Contact</a></li>
-                <li><a href="#elements">Elements</a></li>
+                				<li><a href="#elements">Elements</a></li>
 								<li><a href="logout.php">Log Out</a><li>
 								<!--<li><a href="#elements">Elements</a></li>-->
 							</ul>
@@ -542,8 +542,8 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
           				for (var i = 0; i < lines.length; i++) {
           					var data = lines[i].split(",");
           					var option = document.createElement("option");
-          					option.text = data[0];
-          					option.value = data[1];
+          					option.text = data[1];
+          					option.value = data[0] + "," + data[1] + "," + data[2];
           					select.add(option);
           				}
           			}
