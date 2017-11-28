@@ -5,7 +5,7 @@ include('db.php');
 ?>
 <html>
 	<head>
-		<title>Dimension by HTML5 UP</title>
+		<title>Macro Base</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -142,7 +142,7 @@ include('db.php');
 
 													$userId = $_SESSION["user_id"];
 													$date =  date('Y-m-d');
-													echo($date);
+
 													$sql = "INSERT INTO Food_Intake (date, user_id, foods_id, count) VALUES (" . "now()" . "," . $userId . "," . $foodId . "," . $count . ")";
 
 													if ($connection->query($sql) === TRUE) {
