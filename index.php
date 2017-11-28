@@ -19,6 +19,10 @@
 			<div id="wrapper">
 
 				<!-- Header -->
+
+				<?php
+				if ($_SESSION['loggedin'] != true) {
+				?>
 					<header id="header">
 						<div class="logo">
 							<span class="icon fa-diamond"></span>
@@ -31,17 +35,40 @@
 						</div>
 						<nav>
 							<ul>
-								<li><a href="#intro">Intro</a></li>
-								<li><a href="#work">Work</a></li>
-								<li><a href="#about">About</a></li>
-								<li><a href="#contact">Contact</a></li>
-                                <li><a href="#elements">Elements</a></li>
 								<li><a href="#signin">Sign In</a></li>
+								<li><a href="#signup">Sign Up</a></li>
 								<!--<li><a href="#elements">Elements</a></li>-->
 							</ul>
 						</nav>
 					</header>
-
+				<?php
+					} else {
+				?>
+					<header id="header">
+						<div class="logo">
+							<span class="icon fa-diamond"></span>
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h1>Macrobase</h1>
+								<p>Who says you can't have fun while dieting? With Macrobase, you can! Track your calories and diet throughout the day, and view your progress as you go on with your life!</p>
+							</div>
+						</div>
+						<nav>
+							<ul>
+								<li><a href="#signin">Sign In</a></li>
+								<li><a href="#intro">Intro</a></li>
+								<li><a href="#work">Work</a></li>
+								<li><a href="#about">Add Food</a></li>
+								<li><a href="#contact">Contact</a></li>
+                <li><a href="#elements">Elements</a></li>
+								<!--<li><a href="#elements">Elements</a></li>-->
+							</ul>
+						</nav>
+					</header>
+				<?php
+				}
+				?>
 				<!-- Main -->
 					<div id="main">
 
@@ -96,12 +123,18 @@
 								{
 										if($_POST['action']=="signin")
 										{
+												session_start();
 												$email = mysqli_real_escape_string($connection,$_POST['email']);
 												$password = mysqli_real_escape_string($connection,$_POST['password']);
-												$strSQL = mysqli_query($connection,"select email from users where email='".$email."' and password='".md5($password)."'");
+												$strSQL = mysqli_query($connection,"select first_name, last_name, email from users where email='".$email."' and password='".md5($password)."'");
 												$Results = mysqli_fetch_array($strSQL);
 												if(count($Results)>=1)
 												{
+													$_SESSION['email']=$Results['email'];
+													$_SESSION['first_name']=$Results['first_name'];
+													$_SESSION['last_name']=$Results['last_name'];
+
+													echo "<script type='text/javascript'> document.location = 'index.php'; </script>";// Redirecting To Other Page
 												}
 												else
 												{
@@ -166,7 +199,6 @@
 													$query = "='".$email."'";
 													$result = mysqli_query($connection,$query);
 													$numResults = mysqli_num_rows($result);
-													echo("<p>".$email."</p>");
 													if (!filter_var($email, FILTER_VALIDATE_EMAIL)) // Validate email address
 													{
 															$message =  "Invalid email please type a valid email!!";
