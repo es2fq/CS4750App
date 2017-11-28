@@ -14,6 +14,32 @@
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body>
+        <script>
+            function populateFoodList() {
+            	var rawFile = new XMLHttpRequest();
+            	rawFile.open("GET", "foods.txt", false);
+            	rawFile.onreadystatechange = function() {
+            		if (rawFile.readyState === 4) {
+            			if (rawFile.status === 200 || rawFile.status == 0) {
+            				var allText = rawFile.responseText;
+            				console.log(allText);
+
+            				var lines = allText.split("\n")
+            				var select = document.getElementById("selectFood");
+            				for (var i = 0; i < lines.length; i++) {
+            					var data = lines[i].split(",");
+            					var option = document.createElement("option");
+            					option.text = data[0];
+            					option.value = data[1];
+            					select.add(option);
+            				}
+            			}
+            		}
+            	}
+            	rawFile.send(null);
+            }
+            populateFoodList();
+        </script>
 
 		<!-- Wrapper -->
 			<div id="wrapper">
@@ -31,12 +57,12 @@
 						</div>
 						<nav>
 							<ul>
+								<li><a href="#signin">Sign In</a></li>
 								<li><a href="#intro">Intro</a></li>
 								<li><a href="#work">Work</a></li>
-								<li><a href="#about">About</a></li>
+								<li><a href="#about">Add Food</a></li>
 								<li><a href="#contact">Contact</a></li>
                                 <li><a href="#elements">Elements</a></li>
-								<li><a href="#signin">Sign In</a></li>
 								<!--<li><a href="#elements">Elements</a></li>-->
 							</ul>
 						</nav>
@@ -63,7 +89,10 @@
 
 						<!-- About -->
 							<article id="about">
-								<h2 class="major">About</h2>
+								<h2 class="major">Add Food</h2>
+                                <select id="selectFood">
+                                    <option value="apple">Apple</option>
+                                </select>
 								<span class="image main"><img src="images/pic03.jpg" alt="" /></span>
 								<p>Lorem ipsum dolor sit amet, consectetur et adipiscing elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices. Aliquam libero et malesuada fames ac ante ipsum primis in faucibus. Cras viverra ligula sit amet ex mollis mattis lorem ipsum dolor sit amet.</p>
 							</article>

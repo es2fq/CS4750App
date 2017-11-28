@@ -1,0 +1,45 @@
+apple,72
+bagel,289
+banana,105
+beer,153
+bread,66
+butter,102
+carrots,52
+cheddar cheese,113
+chicken breast,142
+chili with breans,287
+chocolate chip cookie,59
+coffee,2
+cola,136
+corn,180
+egg,102
+graham cracker,59
+granola bar,193
+green beans,40
+ground beef patty,193
+hot dog,137
+ice cream,145
+jelly doughnut,289
+ketchup,15
+milk,122
+mixed nuts,168
+mustard,6
+oatmeal,147
+orange juice,112
+peanut butter,180
+pizza,298
+pork chop,221
+potato,161
+potato chips,155
+pretzels,108
+raisins,130
+ranch salad dressing,146
+red wine,123
+rice,205
+salsa,35
+shrimp,84
+spaghetti,221
+spaghetti sauce,92
+tuna,100
+white wine,121
+cake,243
