@@ -52,7 +52,7 @@
 						<div class="content">
 							<div class="inner">
 								<h1>Macrobase</h1>
-                                <p>Who says you can't have fun while dieting? With Macrobase, you can! Track your calories and diet throughout the day, and view your progress as you go on with your life!</p>
+                <p>Who says you can't have fun while dieting? With Macrobase, you can! Track your calories and diet throughout the day, and view your progress as you go on with your life!</p>
 							</div>
 						</div>
 						<nav>
@@ -96,24 +96,135 @@
 								<p>Lorem ipsum dolor sit amet, consectetur et adipiscing elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices. Aliquam libero et malesuada fames ac ante ipsum primis in faucibus. Cras viverra ligula sit amet ex mollis mattis lorem ipsum dolor sit amet.</p>
 							</article>
 
-						<!-- Contact -->
+						<!-- Sign In -->
 							<article id="signin">
 								<h2 class="major">Sign In</h2>
-								<form method="post" action="#">
+								<form method="post" action="#signin">
 									<div class="field half first">
-										<label for="name">Email</label>
-										<input type="text" name="email" id="email" />
+										<label for="username">Username</label>
+										<input type="text" name="usename" id="username" />
 									</div>
 									<div class="field half second">
 										<label for="password">Password</label>
 										<input type="password" name="password" id="password" />
 									</div>
+									<input name="action" type="hidden" value="signin" /></p>
 									<ul class="actions">
 										<li><input type="submit" value="Sign In" class="special" /></li>
 										<li><input type="reset" value="Reset" /></li>
 									</ul>
+									<br/>
+									<p> Don't have an account? <a href="#signup"> Create an account. </a> </p>
 								</form>
+
+								<?php
+								session_start(); // Starting Session
+								include('db.php');
+								if(isset($_POST['action']))
+								{
+										if($_POST['action']=="signin")
+										{
+												$email = mysqli_real_escape_string($connection,$_POST['email']);
+												$password = mysqli_real_escape_string($connection,$_POST['password']);
+												$strSQL = mysqli_query($connection,"select email from users where email='".$email."' and password='".md5($password)."'");
+												$Results = mysqli_fetch_array($strSQL);
+												if(count($Results)>=1)
+												{
+												}
+												else
+												{
+														$message = "Invalid email or password!!";
+														echo("<p class='login-error-message' stype='color: red;'>".$message."</p>");
+												}
+										}
+								}
+								?>
 							</article>
+
+							<!-- Sign Up -->
+								<article id="signup">
+									<h2 class="major">Sign Up</h2>
+									<form method="post" action="#signup">
+										<div class="field half first">
+											<label for="email_signup">Email</label>
+											<input type="text" name="email_signup" id="email_signup" />
+										</div>
+										<div class="field half second">
+											<label for="password_signup">Password</label>
+											<input type="password" name="password_signup" id="password_signup" />
+										</div>
+										<div class="field half first">
+											<label for="first_name">First Name</label>
+											<input type="text" name="first_name" id="first_name" />
+										</div>
+										<div class="field half second">
+											<label for="last_name">Last Name</label>
+											<input type="text" name="last_name" id="last_name" />
+										</div>
+										<div class="field half first">
+											<label for="current_weight">Current Weight</label>
+											<input type="number" name="current_weight" id="current_weight" />
+										</div>
+										<div class="field half second">
+											<label for="target_weight">Target Weight</label>
+											<input type="number" name="target_weight" id="target_weight" />
+										</div>
+										<div class="field">
+											<label for="age">Age</label>
+											<input type="number" name="age" id="age" />
+										</div>
+										<input name="action" type="hidden" value="signup" /></p>
+										<ul class="actions">
+											<li><input type="submit" value="Sign Up" class="special" /></li>
+											<li><input type="reset" value="Reset" /></li>
+										</ul>
+										<br/>
+										<p> Already have an account? <a href="#signin"> Sign in here. </a> </p>
+									</form>
+
+									<?php
+									session_start(); // Starting Session
+									include('db.php');
+									if(isset($_POST['action']))
+									{
+											if($_POST['action']=="signup")
+											{
+													$email      = mysqli_real_escape_string($connection,$_POST['email_signup']);
+													$password   = mysqli_real_escape_string($connection,$_POST['password_signup']);
+													$query = "='".$email."'";
+													$result = mysqli_query($connection,$query);
+													$numResults = mysqli_num_rows($result);
+													echo("<p>".$email."</p>");
+													if (!filter_var($email, FILTER_VALIDATE_EMAIL)) // Validate email address
+													{
+															$message =  "Invalid email please type a valid email!!";
+															echo("<p id='php_error' class='submission_message_error'>".$message."</p>");
+													}
+													elseif(count($numResults)>=1)
+													{
+														$message = "Email is already taken.";
+														echo("<p class='login-error-message' stype='color: red;'>".$message."</p>");
+													}
+													else
+													{
+														$first_name = mysqli_real_escape_string($connection,$_POST['first_name']);
+														$last_name = mysqli_real_escape_string($connection,$_POST['last_name']);
+														$target_weight = mysqli_real_escape_string($connection,$_POST['target_weight']);
+														$current_weight = mysqli_real_escape_string($connection,$_POST['current_weight']);
+														$age = mysqli_real_escape_string($connection,$_POST['age']);
+
+														mysqli_query($connection, "insert into users(email, password, first_name, last_name, target_weight, current_weight, age) values('".$email."','".md5($password)."','".$first_name."','".$last_name."','".$target_weight."','".$current_weight."','".$age."')");
+														$message = "Signed up sucessfully!!";
+														echo("<p class='submission_message_success'>".$message."</p>");
+													}
+											}
+									}
+									?>
+								</article>
+
+
+
+
 
 						<!-- Elements -->
 							<article id="elements">
