@@ -36,6 +36,8 @@
 								<li><a href="#about">About</a></li>
 								<li><a href="#contact">Contact</a></li>
                                 <li><a href="#elements">Elements</a></li>
+								<li><a href="#signin">Sign In</a></li>
+								<!--<li><a href="#elements">Elements</a></li>-->
 							</ul>
 						</nav>
 					</header>
@@ -67,32 +69,22 @@
 							</article>
 
 						<!-- Contact -->
-							<article id="contact">
-								<h2 class="major">Contact</h2>
+							<article id="signin">
+								<h2 class="major">Sign In</h2>
 								<form method="post" action="#">
 									<div class="field half first">
-										<label for="name">Name</label>
-										<input type="text" name="name" id="name" />
-									</div>
-									<div class="field half">
-										<label for="email">Email</label>
+										<label for="name">Email</label>
 										<input type="text" name="email" id="email" />
 									</div>
-									<div class="field">
-										<label for="message">Message</label>
-										<textarea name="message" id="message" rows="4"></textarea>
+									<div class="field half second">
+										<label for="password">Password</label>
+										<input type="password" name="password" id="password" />
 									</div>
 									<ul class="actions">
-										<li><input type="submit" value="Send Message" class="special" /></li>
+										<li><input type="submit" value="Sign In" class="special" /></li>
 										<li><input type="reset" value="Reset" /></li>
 									</ul>
 								</form>
-								<ul class="icons">
-									<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
-								</ul>
 							</article>
 
 						<!-- Elements -->
